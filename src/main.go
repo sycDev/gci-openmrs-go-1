@@ -1,27 +1,25 @@
 package main
 
 import (
-	"fmt"
 	"github.com/gin-gonic/gin"
+	"net/http"
 )
 
-func HomePage(c *gin.Context) {
+func Hello(c *gin.Context) {
 	c.JSON(200, gin.H{
-		"message": "Hello World",
+		"message": "Hello World!",
 	})
 }
 
-func PostHomePage(c *gin.Context) {
-	c.JSON(200, gin.H{
-		"message": "Post Home Page",
-	})
+func Greet(c *gin.Context) {
+	name := c.Param("name")
+	message := "Hello " + name + "!"
+	c.String(http.StatusOK, message)
 }
 
 func main() {	
-	fmt.Println("Hello World")
-
 	r := gin.Default()
-	r.GET("/", HomePage)
-	r.POST("/", PostHomePage)
+	r.GET("/hello", Hello)
+	r.GET("/greet/:name", Greet)
 	r.Run()
 }
