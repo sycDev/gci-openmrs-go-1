@@ -2,7 +2,6 @@ package main
 
 import (
 	"github.com/gin-gonic/gin"
-	"net/http"
 )
 
 func Hello(c *gin.Context) {
@@ -14,10 +13,12 @@ func Hello(c *gin.Context) {
 func Greet(c *gin.Context) {
 	name := c.Param("name")
 	message := "Hello " + name + "!"
-	c.String(http.StatusOK, message)
+	c.JSON(200, gin.H{
+		"message": message,
+	})
 }
 
-func main() {	
+func main() {
 	r := gin.Default()
 	r.GET("/hello", Hello)
 	r.GET("/greet/:name", Greet)
