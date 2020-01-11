@@ -4,7 +4,7 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
-var name = ""
+const Name = "name"
 
 // Return message "Hello World!" in JSON format
 func Hello(c *gin.Context) {
@@ -15,7 +15,7 @@ func Hello(c *gin.Context) {
 
 // Return message "Hello" and name parameter in JSON format
 func HelloName(c *gin.Context) {
-	name := c.Param("name")
+	name := c.Param(Name)
 	message := "Hello " + name + "!"
 	c.JSON(200, gin.H{
 		"message": message,
