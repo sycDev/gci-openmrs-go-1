@@ -15,7 +15,7 @@ func Hello(c *gin.Context) {
 
 // Return message "Hello" and name parameter in JSON format
 func Greet(c *gin.Context) {
-	name := c.Param("name")
+	name := c.Param(Name)
 	message := "Hello " + name + "!"
 	c.JSON(200, gin.H{
 		"message": message,
@@ -25,6 +25,6 @@ func Greet(c *gin.Context) {
 func main() {
 	r := gin.Default()
 	r.GET("/hello", Hello)
-	r.GET("/greet/:name", HelloName)
+	r.GET("/greet/:name", Greet)
 	r.Run()
 }
